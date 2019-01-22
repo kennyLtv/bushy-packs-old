@@ -4,9 +4,9 @@ async function remakeDir(dir: string) {
   try {
     await fs.access(dir);
     await fs.remove(dir);
-    await fs.mkdir(dir);
+    await fs.mkdirp(dir);
   } catch (err) {
-    await fs.mkdir(dir);
+    await fs.mkdirp(dir);
   }
 }
 
