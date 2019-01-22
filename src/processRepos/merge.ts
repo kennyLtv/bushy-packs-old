@@ -10,8 +10,6 @@ const argServerPath: string = argv.path
   : path.resolve(__dirname, '..', '..', 'test_dir');
 
 async function merge(config: IParsedConfig, repoDir: string) {
-  console.log(repoDir);
-  console.log('has merge');
   await recursiveCopy(
     path.resolve(repoDir, 'merge'),
     argServerPath,

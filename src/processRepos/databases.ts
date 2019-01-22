@@ -1,8 +1,7 @@
 import { IParsedConfig } from '../interfaces';
 
 async function databases(config: IParsedConfig, repoDir: string) {
-  console.log(repoDir);
-  console.log('has databases');
+  // not empty
 }
 
 export default databases;

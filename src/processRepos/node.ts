@@ -18,10 +18,12 @@ async function node(config: IParsedConfig, repoDir: string) {
     execOptions,
   );
 
-  console.log(stdout);
+  if (stdout.trim()) {
+    console.log(stdout.trim());
+  }
 
-  if (stderror) {
-    console.error(stderror);
+  if (stderror.trim()) {
+    console.error('Error: ', stderror.trim());
   }
 }
 

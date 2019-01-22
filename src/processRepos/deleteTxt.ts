@@ -1,8 +1,7 @@
 import { IParsedConfig } from '../interfaces';
 
 async function deleteTxt(config: IParsedConfig, repoDir: string) {
-  console.log(repoDir);
-  console.log('has delete.txt');
+  // not empty
 }
 
 export default deleteTxt;

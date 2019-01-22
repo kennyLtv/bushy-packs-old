@@ -17,6 +17,8 @@ async function processRepos(config: IParsedConfig) {
     const repoDir = path.join(reposDir, gitRepoName);
     const repoFolders = await fs.readdir(repoDir);
 
+    console.log(gitRepoName);
+
     if (repoFolders.includes('merge')) {
       try {
         await merge(config, repoDir);
