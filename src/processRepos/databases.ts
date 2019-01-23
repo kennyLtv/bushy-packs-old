@@ -4,6 +4,7 @@ import * as minimist from 'minimist';
 import * as path from 'path';
 import * as bluebird from 'bluebird';
 import * as vdf from 'simple-vdf';
+import * as _ from 'lodash';
 
 const argv: minimist.ParsedArgs = minimist(process.argv.slice(2));
 
@@ -28,7 +29,7 @@ async function databases(config: IParsedConfig, repoDir: string) {
     const existingSmDbString = existingSmDbBuffer.toString();
     const existingSmDbObj = vdf.parse(existingSmDbString);
 
-    const mergeSmDbBuffer = await fs.readFile(magicDbPath);
+    const mergeSmDbBuffer = await fs.readFile(dbPath);
     const mergeSmDbString = mergeSmDbBuffer.toString();
     const mergeSmDbObj = vdf.parse(mergeSmDbString);
 
