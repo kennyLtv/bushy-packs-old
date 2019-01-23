@@ -8,6 +8,7 @@ import node from './node';
 import sh from './sh';
 import scripting from './scripting';
 import deleteTxt from './deleteTxt';
+import databases from './databases';
 
 const reposDir = path.resolve(__dirname, '..', '..', '.repos');
 
@@ -17,7 +18,7 @@ async function processRepos(config: IParsedConfig) {
     const repoDir = path.join(reposDir, gitRepoName);
     const repoFolders = await fs.readdir(repoDir);
 
-    console.log('Running:', gitRepoName);
+    console.log(`Running: ${gitRepoName}`);
 
     if (repoFolders.includes('merge')) {
       try {
@@ -54,6 +55,16 @@ async function processRepos(config: IParsedConfig) {
         console.error('error while running scripting magic');
       }
     }
+
+    if (repoFolders.includes('databases.cfg')) {
+      try {
+        await databases(config, repoDir);
+      } catch (err) {
+        console.error(err);
+        console.error('error while deleting files in txt');
+      }
+    }
+
 
     if (repoFolders.includes('delete.txt')) {
       try {
