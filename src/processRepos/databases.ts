@@ -1,18 +1,11 @@
-import { IParsedConfig, IExecResponse } from '../interfaces';
+import { IParsedConfig } from '../interfaces';
 import * as fs from 'fs-extra';
-import * as minimist from 'minimist';
 import * as path from 'path';
 import * as bluebird from 'bluebird';
 import * as vdf from 'simple-vdf';
 import * as _ from 'lodash';
 
-const argv: minimist.ParsedArgs = minimist(process.argv.slice(2));
-
-const argMod = argv.mod || 'csgo';
-const argServerPath: string = argv.path
-  ? path.resolve(__dirname, argv.path)
-  : path.resolve(__dirname, '..', '..', 'test_dir');
-const modPath = path.resolve(argServerPath, argMod);
+import { modPath } from '../args';
 
 async function databases(config: IParsedConfig, repoDir: string) {
   const dbPath = path.join(repoDir, 'databases.cfg');

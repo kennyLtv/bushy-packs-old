@@ -1,16 +1,12 @@
-import * as fs from 'fs-extra';
-import * as minimist from 'minimist';
 import * as git from 'nodegit';
 import * as os from 'os';
 import * as path from 'path';
+import { rsaKey } from './args';
 
 const { Cred, Clone } = git;
 
-const argv = minimist(process.argv.slice(2));
-const argRsaKey = argv.rsa || 'id_rsa_tarik';
-
-const pubKeyPath = path.join(os.homedir(), '.ssh', `${argRsaKey}.pub`);
-const privKeyPath = path.join(os.homedir(), '.ssh', argRsaKey);
+const pubKeyPath = path.join(os.homedir(), '.ssh', `${rsaKey}.pub`);
+const privKeyPath = path.join(os.homedir(), '.ssh', rsaKey);
 
 const cloneOptions = {
   fetchOpts: {

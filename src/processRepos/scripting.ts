@@ -1,18 +1,11 @@
 import { IParsedConfig, IExecResponse } from '../interfaces';
 import recursiveCopy from '../recursiveCopy';
 import * as fs from 'fs-extra';
-import * as minimist from 'minimist';
 import * as path from 'path';
 import execAsync from '../execAsync';
 import * as bluebird from 'bluebird';
 
-const argv: minimist.ParsedArgs = minimist(process.argv.slice(2));
-
-const argMod = argv.mod || 'csgo';
-const argServerPath: string = argv.path
-  ? path.resolve(__dirname, argv.path)
-  : path.resolve(__dirname, '..', '..', 'test_dir');
-const modPath = path.resolve(argServerPath, argMod);
+import { modPath } from '../args';
 
 const serverScriptingPath = path.join(
   modPath,
