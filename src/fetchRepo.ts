@@ -11,7 +11,7 @@ const privKeyPath = path.join(os.homedir(), '.ssh', rsaKey);
 const cloneOptions = {
   fetchOpts: {
     callbacks: {
-      credentials(url: string, userName: string) {
+      credentials(_url: string, userName: string) {
         const creds = Cred.sshKeyNew(userName, pubKeyPath, privKeyPath, '');
         return creds;
       },

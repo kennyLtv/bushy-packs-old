@@ -5,7 +5,7 @@ import * as path from 'path';
 
 import { serverPath } from '../args';
 
-async function deleteTxt(config: IParsedConfig, repoDir: string) {
+async function deleteTxt(_config: IParsedConfig, repoDir: string) {
   const deletePath = path.join(repoDir, 'delete.txt');
   const deleteFile = await fs.readFile(deletePath);
   const deleteFileString = deleteFile.toString();

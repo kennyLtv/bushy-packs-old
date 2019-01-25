@@ -1,13 +1,12 @@
 import { IParsedConfig } from '../interfaces';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import * as bluebird from 'bluebird';
 import * as vdf from 'simple-vdf';
 import * as _ from 'lodash';
 
 import { modPath } from '../args';
 
-async function databases(config: IParsedConfig, repoDir: string) {
+async function databases(_config: IParsedConfig, repoDir: string) {
   const dbPath = path.join(repoDir, 'databases.cfg');
   const existingSmDbPath = path.join(
     modPath,

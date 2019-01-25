@@ -38,7 +38,7 @@ async function parseConfig(configDir: string) {
     }
   });
 
-  newVars = _.mapKeys(newVars, (value, key) => `bp_${key}`);
+  newVars = _.mapKeys(newVars, (_value, key) => `bp_${key}`);
 
   const parsedObj: IParsedConfig = {
     repos: configPreset.repos,

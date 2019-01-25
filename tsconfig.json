@@ -6,6 +6,8 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "outDir": "./dist",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "plugins": [
       {
         "name": "typescript-tslint-plugin"
