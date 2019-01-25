@@ -48,7 +48,6 @@ async function mergeVDF(src: string, dest: string, vars: IEnvVars) {
       await fs.writeFile(newSbDbString, dest);
     }
   )
-
 }
 
 async function copyTemplatedFile(src: string, dest: string, vars: IEnvVars) {
