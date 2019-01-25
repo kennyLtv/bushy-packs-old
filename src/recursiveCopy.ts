@@ -3,7 +3,10 @@ import * as through2 from 'through2';
 import * as Mustache from 'mustache';
 import * as fs from 'fs-extra';
 import * as bluebird from 'bluebird';
+import * as vdf from 'simple-vdf';
+import * as _ from 'lodash';
 
+import { modPath } from './args';
 import { IEnvVars } from './interfaces';
 
 function mustacheTransform(envs: IEnvVars) {
@@ -19,38 +22,62 @@ function mustacheTransform(envs: IEnvVars) {
   );
 }
 
-async function mergeVDF(src: string, dest: string) {
-  console.log(src, dest);
-  await bluebird.join();
+async function mergeVDF(src: string, dest: string, vars: IEnvVars) {
+  const existingSmDbPath = path.join(
+    modPath,
+    'addons',
+    'sourcemod',
+    'configs',
+    'databases.cfg',
+  );
+
+  await bluebird.join(
+    fs.readFile(existingSmDbPath),
+    fs.readFile(src),
+    async (serverSmDbBuffer, mergeSmDbBuffer) => {
+      const serverSmDbString = serverSmDbBuffer.toString();
+      const templatedString = Mustache.render(serverSmDbString, vars);
+      const serverSmDbObj = vdf.parse(templatedString);
+
+      const mergeSmDbString = mergeSmDbBuffer.toString();
+      const mergeSmDbObj = vdf.parse(mergeSmDbString);
+
+      const newSmDbObj = _.merge(serverSmDbObj, mergeSmDbObj);
+      const newSbDbString = vdf.stringify(newSmDbObj, true);
+
+      await fs.writeFile(newSbDbString, dest);
+    }
+  )
+
+}
+
+async function copyTemplatedFile(src: string, dest: string, vars: IEnvVars) {
+  await new bluebird((resolve, reject) => {
+    const readStream = fs.createReadStream(src);
+    const writeStream = fs.createWriteStream(dest);
+
+    readStream.pipe(mustacheTransform(vars)).pipe(writeStream);
+
+    readStream.on('error', reject);
+    writeStream.on('error', reject);
+
+    writeStream.once('finish', () => {
+      resolve();
+    });
+  });
 }
 
 function filterWithVars(vars: IEnvVars) {
   return async function filter(src: string, dest: string): Promise<boolean> {
-    if (path.basename(src).includes('.bpm')) {
-      const newDest = dest.replace('.bpm', '');
-
-      await mergeVDF(src, newDest);
-
+    if (path.basename(src) === 'bpm.cfg') {
+      const newDest = dest.replace('.bpm.cfg', '');
+      await mergeVDF(src, newDest, vars);
       return false;
     }
 
     if (path.basename(src).includes('.bp')) {
       const newDest = dest.replace('.bp', '');
-
-      await new bluebird((resolve, reject) => {
-        const readStream = fs.createReadStream(src);
-        const writeStream = fs.createWriteStream(newDest);
-
-        readStream.pipe(mustacheTransform(vars)).pipe(writeStream);
-
-        readStream.on('error', reject);
-        writeStream.on('error', reject);
-
-        writeStream.once('finish', () => {
-          resolve();
-        });
-      });
-
+      await copyTemplatedFile(src, newDest, vars);
       return false;
     }
 
