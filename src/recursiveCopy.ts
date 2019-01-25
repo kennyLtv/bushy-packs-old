@@ -19,8 +19,21 @@ function mustacheTransform(envs: IEnvVars) {
   );
 }
 
+async function mergeVDF(src: string, dest: string) {
+  console.log(src, dest);
+  await bluebird.join();
+}
+
 function filterWithVars(vars: IEnvVars) {
   return async function filter(src: string, dest: string): Promise<boolean> {
+    if (path.basename(src).includes('.bpm')) {
+      const newDest = dest.replace('.bpm', '');
+
+      await mergeVDF(src, newDest);
+
+      return false;
+    }
+
     if (path.basename(src).includes('.bp')) {
       const newDest = dest.replace('.bp', '');
 
@@ -40,6 +53,7 @@ function filterWithVars(vars: IEnvVars) {
 
       return false;
     }
+
     return true;
   };
 }
