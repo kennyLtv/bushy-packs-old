@@ -1,32 +1,26 @@
 import { IParsedConfig, IEnvVars } from './interfaces';
 import * as fs from 'fs-extra';
 import * as _ from 'lodash';
-import * as minimist from 'minimist';
 import * as path from 'path';
+import { presetName, serverPath, mod } from './args';
 
-const argv = minimist(process.argv.slice(2));
-const argPresetName = argv.preset;
-const argServerPath = argv.path
-  ? path.resolve(__dirname, argv.path)
-  : path.resolve(__dirname, '../test_dir');
-const argMod = argv.mod || 'csgo';
 
 async function parseConfig(configDir: string) {
   const config = await fs.readJson(path.join(configDir, 'config.json'));
 
   const configPreset = _.find(config.presets, preset => {
     const foundPreset = _.find(Object.keys(preset.servers), server => {
-      return server === argPresetName;
+      return server === presetName;
     });
     return !!foundPreset;
   });
 
   const { globals } = configPreset;
-  const serverVars = configPreset.servers[argPresetName];
+  const serverVars = configPreset.servers[presetName];
 
   let newVars: IEnvVars = {
-    mod: argMod,
-    serverPath: argServerPath,
+    mod,
+    serverPath: serverPath,
   };
 
   _.each(globals, (varValue, varKey) => {
@@ -44,7 +38,7 @@ async function parseConfig(configDir: string) {
     }
   });
 
-  newVars = _.mapKeys(newVars, (value, key) => `bp_${key}`);
+  newVars = _.mapKeys(newVars, (_value, key) => `bp_${key}`);
 
   const parsedObj: IParsedConfig = {
     repos: configPreset.repos,
