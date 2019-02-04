@@ -69,7 +69,7 @@ async function copyTemplatedFile(src: string, dest: string, vars: IEnvVars) {
 function filterWithVars(vars: IEnvVars) {
   return async function filter(src: string, dest: string): Promise<boolean> {
     if (path.basename(src).includes('bpm.cfg')) {
-      const newDest = dest.replace('.bpm.cfg', '');
+      const newDest = dest.replace('.bpm.cfg', '.cfg');
       await mergeVDF(src, newDest, vars);
       return false;
     }
