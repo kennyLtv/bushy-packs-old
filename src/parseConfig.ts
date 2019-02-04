@@ -12,7 +12,7 @@ const argServerPath = argv.path
 const argMod = argv.mod || 'csgo';
 
 async function parseConfig(configDir: string) {
-  const config = await fs.readJson(path.join(configDir, 'test.json'));
+  const config = await fs.readJson(path.join(configDir, 'config.json'));
 
   const configPreset = _.find(config.presets, preset => {
     const foundPreset = _.find(Object.keys(preset.servers), server => {
