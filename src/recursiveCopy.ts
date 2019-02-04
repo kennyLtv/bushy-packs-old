@@ -45,7 +45,7 @@ async function mergeVDF(src: string, dest: string, vars: IEnvVars) {
       const newSmDbObj = _.merge(serverSmDbObj, mergeSmDbObj);
       const newSbDbString = vdf.stringify(newSmDbObj, true);
 
-      await fs.writeFile(newSbDbString, dest);
+      await fs.writeFile(dest, newSbDbString);
     }
   )
 }
@@ -68,7 +68,7 @@ async function copyTemplatedFile(src: string, dest: string, vars: IEnvVars) {
 
 function filterWithVars(vars: IEnvVars) {
   return async function filter(src: string, dest: string): Promise<boolean> {
-    if (path.basename(src) === 'bpm.cfg') {
+    if (path.basename(src).includes('bpm.cfg')) {
       const newDest = dest.replace('.bpm.cfg', '');
       await mergeVDF(src, newDest, vars);
       return false;
