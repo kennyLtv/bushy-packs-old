@@ -3,7 +3,7 @@ import * as path from 'path';
 
 const argv: minimist.ParsedArgs = minimist(process.argv.slice(2));
 const argServerPath: string = argv.path
-  ? path.resolve(__dirname, argv.path)
+  ? path.resolve(argv.path)
   : path.resolve(__dirname, '..', '..', 'test_dir');
 const argMod = argv.mod || 'csgo';
 const modPath = path.resolve(argServerPath, argMod);
