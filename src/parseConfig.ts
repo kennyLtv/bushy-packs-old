@@ -4,7 +4,6 @@ import * as _ from 'lodash';
 import * as path from 'path';
 import { presetName, serverPath, mod } from './args';
 
-
 async function parseConfig(configDir: string) {
   const config = await fs.readJson(path.join(configDir, 'config.json'));
 
@@ -20,7 +19,7 @@ async function parseConfig(configDir: string) {
 
   let newVars: IEnvVars = {
     mod,
-    serverPath: serverPath,
+    serverPath,
   };
 
   _.each(globals, (varValue, varKey) => {
