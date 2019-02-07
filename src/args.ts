@@ -8,7 +8,7 @@ const argServerPath: string = argv.path
 const argMod = argv.mod || 'csgo';
 const modPath = path.resolve(argServerPath, argMod);
 const argPresetName = argv.preset;
-const argRsaKey = argv.rsa || 'id_rsa_tarik';
+const argRsaKey = argv.rsa || 'id_rsa';
 const argConfigRepo: string = argv.config || 'bushtarikgg/tarik-server-configs';
 
 const args = {
