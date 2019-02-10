@@ -28,7 +28,7 @@ async function scripting(config: IParsedConfig, repoDir: string) {
     }
 
     console.log(`Running: ${script}`);
-    
+
     const smxName = script.replace('.sp', '.smx');
     const command = `./spcomp ${script} -o../plugins/${smxName} -w203`;
 
@@ -44,7 +44,6 @@ async function scripting(config: IParsedConfig, repoDir: string) {
       console.log(stdout.trim());
     }
   });
-
 }
 
 export default scripting;
