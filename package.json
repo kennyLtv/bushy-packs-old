@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "yarn build && node ./dist/index.js --preset chi.retakes",
+    "dev": "yarn build && node ./dist/index.js --preset chi.retake",
     "build": "tsc"
   },
   "dependencies": {
