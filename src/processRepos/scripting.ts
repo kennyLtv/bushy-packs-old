@@ -23,9 +23,12 @@ async function scripting(config: IParsedConfig, repoDir: string) {
 
   await bluebird.map(ls, async (script: string) => {
     if (path.extname(script) !== '.sp') {
+      console.log(`found a non .sp file: ${script}`);
       return;
     }
 
+    console.log(`Running: ${script}`);
+    
     const smxName = script.replace('.sp', '.smx');
     const command = `./spcomp ${script} -o../plugins/${smxName} -w203`;
 
