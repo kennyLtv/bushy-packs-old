@@ -3,7 +3,7 @@ import * as os from 'os';
 import * as path from 'path';
 import { rsaKey } from './args';
 
-const  { argBitbucket } = './args.ts';
+import  { argBitbucket } from './args';
 
 const { Cred, Clone } = git;
 
