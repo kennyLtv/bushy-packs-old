@@ -12,7 +12,7 @@ const argRsaKey = argv.rsa || 'id_rsa';
 const argConfigRepo: string = argv.config || 'bushtarikgg/tarik-server-configs';
 const argDev = argv.d;
 
-const argBitbucket = argv.bitbucket;
+const argBitbucket = (argv.bitbucket);
 
 const args = {
   mod: argMod,
