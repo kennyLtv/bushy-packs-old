@@ -3,6 +3,8 @@ import * as os from 'os';
 import * as path from 'path';
 import { rsaKey } from './args';
 
+const  { argBitbucket } = './args.ts';
+
 const { Cred, Clone } = git;
 
 const pubKeyPath = path.join(os.homedir(), '.ssh', `${rsaKey}.pub`);
@@ -20,8 +22,14 @@ const cloneOptions = {
 };
 
 async function fetchRepo(repoName: string, outputDirectory: string) {
-  const configGitUrl = `git@github.com:${repoName}.git`;
-  await Clone.clone(configGitUrl, outputDirectory, cloneOptions);
+
+  let url = `git@github.com:${repoName}.git`;
+
+  if (argBitbucket) {
+    url = `git@bitbucket.org:${repoName}.git`;
+  }
+
+  await Clone.clone(url, outputDirectory, cloneOptions);
 }
 
 export default fetchRepo;
