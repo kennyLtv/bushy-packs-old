@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as through2 from 'through2';
-import * as Mustache from 'mustache';
+import * as handlebars from 'handlebars';
 import * as fs from 'fs-extra';
 import * as bluebird from 'bluebird';
 import * as vdf from 'simple-vdf';
@@ -9,15 +9,16 @@ import * as _ from 'lodash';
 import { modPath } from './args';
 import { IEnvVars } from './interfaces';
 
-function mustacheTransform(envs: IEnvVars) {
+function handlebarsTransform(envs: IEnvVars) {
   return through2(
     {
       allowHalfOpen: false,
       objectMode: true,
     },
     (chunk, enc, cb) => {
-      const rendered = Mustache.render(chunk.toString(enc), envs);
-      cb(null, rendered);
+      const template = handlebars.compile(chunk.toString(enc))
+      const templatedString = template(envs);
+      cb(null, templatedString);
     },
   );
 }
@@ -36,7 +37,8 @@ async function mergeVDF(src: string, dest: string, vars: IEnvVars) {
     fs.readFile(src),
     async (serverSmDbBuffer, mergeSmDbBuffer) => {
       const serverSmDbString = serverSmDbBuffer.toString();
-      const templatedString = Mustache.render(serverSmDbString, vars);
+      const template = handlebars.compile(serverSmDbString)
+      const templatedString = template(vars);
       const serverSmDbObj = vdf.parse(templatedString);
 
       const mergeSmDbString = mergeSmDbBuffer.toString();
@@ -55,7 +57,7 @@ async function copyTemplatedFile(src: string, dest: string, vars: IEnvVars) {
     const readStream = fs.createReadStream(src);
     const writeStream = fs.createWriteStream(dest);
 
-    readStream.pipe(mustacheTransform(vars)).pipe(writeStream);
+    readStream.pipe(handlebarsTransform(vars)).pipe(writeStream);
 
     readStream.on('error', reject);
     writeStream.on('error', reject);
