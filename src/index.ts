@@ -7,7 +7,7 @@ import processRepos from './processRepos/index';
 import remakeDir from './remakeDir';
 import { IParsedConfig } from './interfaces';
 
-import { configRepo, argDev, modPath } from './args';
+import { configRepo, argDev, modPath, argRepo } from './args';
 
 const [, configRepoName]: string[] = configRepo.split('/');
 
@@ -21,8 +21,19 @@ async function start() {
   }
   await fetchRepo(configRepo, configDir);
   const parsedConfig: IParsedConfig = await parseConfig(configDir);
-  await fetchPresetRepos(parsedConfig.repos);
-  await processRepos(parsedConfig);
+
+  if (argRepo) {
+    const newConfig: IParsedConfig = {
+      ...parsedConfig,
+      repos: [argRepo]
+    }
+
+    await fetchPresetRepos(newConfig.repos);
+    await processRepos(newConfig);
+  } else {
+    await fetchPresetRepos(parsedConfig.repos);
+    await processRepos(parsedConfig);
+  }
 }
 
 start();

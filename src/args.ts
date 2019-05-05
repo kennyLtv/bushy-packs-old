@@ -12,6 +12,8 @@ const argRsaKey = argv.rsa || 'id_rsa';
 const argConfigRepo: string = argv.config || 'bushtarikgg/tarik-server-configs';
 const argDev = argv.d;
 
+const argRepo = argv.repo;
+
 const argBitbucket = (argv.bitbucket);
 
 const args = {
@@ -22,7 +24,8 @@ const args = {
   rsaKey: argRsaKey,
   configRepo: argConfigRepo,
   argDev,
-  argBitbucket
+  argBitbucket,
+  argRepo
 };
 
 export = args;
