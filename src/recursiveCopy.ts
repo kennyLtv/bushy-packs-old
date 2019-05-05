@@ -10,7 +10,7 @@ import { modPath } from './args';
 import { IEnvVars, IIncObj } from './interfaces';
 
 const inc: IIncObj = {};
-handlebars.registerHelper('foo', function (id) {
+handlebars.registerHelper('inc', function (id) {
   if (typeof (inc[id]) === 'undefined') {
     inc[id] = 0;
   } else {
