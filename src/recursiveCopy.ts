@@ -12,7 +12,7 @@ import { IEnvVars, IIncObj } from './interfaces';
 const inc: IIncObj = {};
 handlebars.registerHelper('inc', function (id) {
   if (typeof (inc[id]) === 'undefined') {
-    inc[id] = 0;
+    inc[id] = 1;
   } else {
     inc[id] = inc[id] += 1;
   }
