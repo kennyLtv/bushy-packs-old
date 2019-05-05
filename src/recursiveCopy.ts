@@ -7,7 +7,17 @@ import * as vdf from 'simple-vdf';
 import * as _ from 'lodash';
 
 import { modPath } from './args';
-import { IEnvVars } from './interfaces';
+import { IEnvVars, IIncObj } from './interfaces';
+
+const inc: IIncObj = {};
+handlebars.registerHelper('foo', function (id) {
+  if (typeof (inc[id]) === 'undefined') {
+    inc[id] = 0;
+  } else {
+    inc[id] = inc[id] += 1;
+  }
+  return inc[id];
+});
 
 function handlebarsTransform(envs: IEnvVars) {
   return through2(

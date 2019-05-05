@@ -11,3 +11,7 @@ export interface IExecResponse {
   stdout: string;
   stderror: string;
 }
+
+export interface IIncObj {
+  [key: string]: number;
+}
