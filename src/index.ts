@@ -7,7 +7,7 @@ import processRepos from './processRepos/index';
 import remakeDir from './remakeDir';
 import { IParsedConfig } from './interfaces';
 
-import { configRepo, modPath, argRepo } from './args';
+import { configRepo, argRepo } from './args';
 
 const [, configRepoName]: string[] = configRepo.split('/');
 
