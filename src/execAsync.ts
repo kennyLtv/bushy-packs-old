@@ -9,6 +9,9 @@ export default function execAsync(
   return new bluebird((resolve, reject) => {
     childProcess.exec(line, options, (err, stdout, stderror) => {
       if (err) {
+        console.log('stdout', stdout);
+        console.log('stderror', stderror);
+
         reject(err);
       } else {
         const execResponse: IExecResponse = {
