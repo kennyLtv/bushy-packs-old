@@ -15,6 +15,6 @@
     ],
     "lib": ["es2018"]
   },
-  "files": ["./src/index.ts"],
+  "files": ["./src/bp.ts"],
   "include": ["./types/**/*"]
 }

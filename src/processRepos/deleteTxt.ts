@@ -3,7 +3,7 @@ import * as fs from 'fs-extra';
 import * as bluebird from 'bluebird';
 import * as path from 'path';
 
-import { serverPath } from '../args';
+import { path as serverPath } from '../args';
 
 async function deleteTxt(_config: IParsedConfig, repoDir: string) {
   const deletePath = path.join(repoDir, 'delete.txt');

@@ -2,20 +2,20 @@ import { IParsedConfig, IEnvVars } from './interfaces';
 import * as fs from 'fs-extra';
 import * as _ from 'lodash';
 import * as path from 'path';
-import { presetName, serverPath, mod } from './args';
+import { preset, path as serverPath, mod } from './args';
 
 async function parseConfig(configDir: string) {
   const config = await fs.readJson(path.join(configDir, 'config.json'));
 
   const configPreset = _.find(config.presets, preset => {
     const foundPreset = _.find(Object.keys(preset.servers), server => {
-      return server === presetName;
+      return server === preset;
     });
     return !!foundPreset;
   });
 
   const { globals } = configPreset;
-  const serverVars = configPreset.servers[presetName];
+  const serverVars = configPreset.servers[preset];
 
   let newVars: IEnvVars = {
     mod,

@@ -1,10 +1,11 @@
 {
   "scripts": {
-    "dev": "yarn build && node ./dist/index.js --preset chi.retake",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node ./dist/bp"
   },
   "dependencies": {
     "bluebird": "^3.5.3",
+    "commander": "^2.20.0",
     "fs-extra": "^7.0.1",
     "handlebars": "^4.1.2",
     "lodash": "^4.17.11",
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.25",
+    "@types/commander": "^2.12.2",
     "@types/fs-extra": "^5.0.4",
     "@types/handlebars": "^4.1.0",
     "@types/lodash": "^4.14.120",

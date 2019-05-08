@@ -1,12 +1,12 @@
 import { IParsedConfig } from '../interfaces';
 import recursiveCopy from '../recursiveCopy';
 
-import { serverPath } from '../args';
+import { path } from '../args';
 
 async function merge(config: IParsedConfig, dir: string) {
   await recursiveCopy(
     dir,
-    serverPath,
+    path,
     config.vars,
   );
 }
