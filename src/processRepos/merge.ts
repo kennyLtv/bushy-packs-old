@@ -1,13 +1,11 @@
-import * as path from 'path';
-
 import { IParsedConfig } from '../interfaces';
 import recursiveCopy from '../recursiveCopy';
 
 import { serverPath } from '../args';
 
-async function merge(config: IParsedConfig, repoDir: string) {
+async function merge(config: IParsedConfig, dir: string) {
   await recursiveCopy(
-    path.resolve(repoDir, 'merge'),
+    dir,
     serverPath,
     config.vars,
   );

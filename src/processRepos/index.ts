@@ -21,7 +21,8 @@ async function processRepos(config: IParsedConfig) {
 
     if (repoFolders.includes('merge')) {
       try {
-        await merge(config, repoDir);
+        const dir = path.resolve(repoDir, 'merge');
+        await merge(config, dir);
       } catch (err) {
         console.error(err);
         console.error('error while merging');
@@ -61,6 +62,16 @@ async function processRepos(config: IParsedConfig) {
       } catch (err) {
         console.error(err);
         console.error('error while deleting files in txt');
+      }
+    }
+
+    if (repoFolders.includes('merge-post')) {
+      try {
+        const dir = path.resolve(repoDir, 'merge-post');
+        await merge(config, dir);
+      } catch (err) {
+        console.error(err);
+        console.error('error while merging');
       }
     }
   });
