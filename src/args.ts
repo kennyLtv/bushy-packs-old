@@ -14,13 +14,13 @@ interface InterfaceCLI extends commander.Command {
 
 const program: InterfaceCLI = commander
   .version('0.1.0')
-  .usage('[options] <file>')
-  .option('-m, --mod [mod]', 'The mod you are using. (cstring|csgo)', 'csgo')
-  .option('-c, --config <repo>', 'The repo that holds your config.')
+  .usage('[options] --dir <dir> --config <config> --preset <preset>')
+  .option('-m, --mod <mod>', 'The mod you are using. (cstring|csgo)', 'csgo')
+  .option('-c, --config <config>', 'The repo that holds your config.')
   .option('-d, --dir <dir>', 'The directory that holds your mod directory.')
-  .option('-k, --key [name]', 'The name of the key in your .ssh folder.', 'id_rsa')
-  .option('-p, --preset <name>', 'The preset within your config')
-  .option('-r, --repo [name]', 'A specific repo if you only want to install one.')
+  .option('-k, --key <key>', 'The name of the key in your .ssh folder.', 'id_rsa')
+  .option('-p, --preset <preset>', 'The preset within your config')
+  .option('-r, --repo <repo>', 'A specific repo if you only want to install one.')
   .option('-b, --bitbucket', 'Use this if you are on bitbucket')
   .parse(process.argv);
 
