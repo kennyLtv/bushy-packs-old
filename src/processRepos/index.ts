@@ -71,7 +71,7 @@ async function processRepos(config: IParsedConfig) {
         await merge(config, dir);
       } catch (err) {
         console.error(err);
-        console.error('error while merging');
+        console.error('error while merging post');
       }
     }
   });
