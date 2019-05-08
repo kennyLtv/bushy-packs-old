@@ -1,6 +1,6 @@
 import * as fs from 'fs-extra';
 
-async function remakeDir(dir: string) {
+async function remakeDir(dir: string): Promise<void> {
   try {
     await fs.access(dir);
     await fs.remove(dir);

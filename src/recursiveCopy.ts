@@ -7,33 +7,41 @@ import * as vdf from 'simple-vdf';
 import * as _ from 'lodash';
 
 import { modPath } from './args';
-import { IEnvVars, IIncObj } from './interfaces';
+import { EnvVars, IncObj } from './interfaces';
+import { Transform } from 'stream';
 
-const inc: IIncObj = {};
-handlebars.registerHelper('inc', (id) => {
-  if (typeof (inc[id]) === 'undefined') {
-    inc[id] = 1;
-  } else {
-    inc[id] = inc[id] += 1;
-  }
-  return inc[id];
-});
+const inc: IncObj = {};
+handlebars.registerHelper(
+  'inc',
+  (id: string): number => {
+    if (typeof inc[id] === 'undefined') {
+      inc[id] = 1;
+    } else {
+      inc[id] = inc[id] += 1;
+    }
+    return inc[id];
+  },
+);
 
-function handlebarsTransform(envs: IEnvVars) {
+function handlebarsTransform(envs: EnvVars): Transform {
   return through2(
     {
       allowHalfOpen: false,
       objectMode: true,
     },
-    (chunk, enc, cb) => {
-      const template = handlebars.compile(chunk.toString(enc))
+    (chunk, enc, cb): void => {
+      const template = handlebars.compile(chunk.toString(enc));
       const templatedString = template(envs);
       cb(null, templatedString);
     },
   );
 }
 
-async function mergeVDF(src: string, dest: string, vars: IEnvVars) {
+async function mergeVDF(
+  src: string,
+  dest: string,
+  vars: EnvVars,
+): Promise<void> {
   const existingSmDbPath = path.join(
     modPath,
     'addons',
@@ -45,9 +53,9 @@ async function mergeVDF(src: string, dest: string, vars: IEnvVars) {
   await bluebird.join(
     fs.readFile(existingSmDbPath),
     fs.readFile(src),
-    async (serverSmDbBuffer, mergeSmDbBuffer) => {
+    async (serverSmDbBuffer, mergeSmDbBuffer): Promise<void> => {
       const serverSmDbString = serverSmDbBuffer.toString();
-      const template = handlebars.compile(serverSmDbString)
+      const template = handlebars.compile(serverSmDbString);
       const templatedString = template(vars);
       const serverSmDbObj = vdf.parse(templatedString);
 
@@ -58,27 +66,36 @@ async function mergeVDF(src: string, dest: string, vars: IEnvVars) {
       const newSbDbString = vdf.stringify(newSmDbObj, true);
 
       await fs.writeFile(dest, newSbDbString);
-    }
-  )
+    },
+  );
 }
 
-async function copyTemplatedFile(src: string, dest: string, vars: IEnvVars) {
-  await new bluebird((resolve, reject) => {
-    const readStream = fs.createReadStream(src);
-    const writeStream = fs.createWriteStream(dest);
+async function copyTemplatedFile(
+  src: string,
+  dest: string,
+  vars: EnvVars,
+): Promise<void> {
+  await new bluebird(
+    (resolve, reject): void => {
+      const readStream = fs.createReadStream(src);
+      const writeStream = fs.createWriteStream(dest);
 
-    readStream.pipe(handlebarsTransform(vars)).pipe(writeStream);
+      readStream.pipe(handlebarsTransform(vars)).pipe(writeStream);
 
-    readStream.on('error', reject);
-    writeStream.on('error', reject);
+      readStream.on('error', reject);
+      writeStream.on('error', reject);
 
-    writeStream.once('finish', () => {
-      resolve();
-    });
-  });
+      writeStream.once(
+        'finish',
+        (): void => {
+          resolve();
+        },
+      );
+    },
+  );
 }
 
-function filterWithVars(vars: IEnvVars) {
+function filterWithVars(vars: EnvVars): fs.CopyFilterAsync {
   return async function filter(src: string, dest: string): Promise<boolean> {
     if (path.basename(src).includes('bpm.cfg')) {
       const newDest = dest.replace('.bpm.cfg', '.cfg');
@@ -99,8 +116,8 @@ function filterWithVars(vars: IEnvVars) {
 async function recursiveCopy(
   src: string,
   dest: string,
-  vars: IEnvVars,
-): Promise<any> {
+  vars: EnvVars,
+): Promise<void> {
   const copyOptions: fs.CopyOptions = {
     filter: filterWithVars(vars),
   };

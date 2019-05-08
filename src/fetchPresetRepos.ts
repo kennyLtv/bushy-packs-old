@@ -4,13 +4,16 @@ import fetchRepo from './fetchRepo';
 
 const reposDir = path.resolve(__dirname, '..', '.repos');
 
-async function fetchPresetRepos(repos: string[]) {
-  await bluebird.map(repos, async repo => {
-    const [, gitRepoName] = repo.split('/');
-    const newRepoDir = path.join(reposDir, gitRepoName);
-    await fetchRepo(repo, newRepoDir);
-    console.log(`Cloned:  ${gitRepoName}`);
-  });
+async function fetchPresetRepos(repos: string[]): Promise<void> {
+  await bluebird.map(
+    repos,
+    async (repo): Promise<void> => {
+      const [, gitRepoName] = repo.split('/');
+      const newRepoDir = path.join(reposDir, gitRepoName);
+      await fetchRepo(repo, newRepoDir);
+      console.log(`Cloned:  ${gitRepoName}`);
+    },
+  );
 }
 
 export default fetchPresetRepos;

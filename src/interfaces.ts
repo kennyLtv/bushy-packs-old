@@ -1,17 +1,17 @@
-export interface IEnvVars {
+export interface EnvVars {
   [key: string]: string;
 }
 
-export interface IParsedConfig {
+export interface ParsedConfig {
   readonly repos: string[];
-  vars: IEnvVars;
+  vars: EnvVars;
 }
 
-export interface IExecResponse {
+export interface ExecResponse {
   stdout: string;
   stderror: string;
 }
 
-export interface IIncObj {
+export interface IncObj {
   [key: string]: number;
 }

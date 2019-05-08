@@ -1,14 +1,10 @@
-import { IParsedConfig } from '../interfaces';
+import { ParsedConfig } from '../interfaces';
 import recursiveCopy from '../recursiveCopy';
 
 import { path } from '../args';
 
-async function merge(config: IParsedConfig, dir: string) {
-  await recursiveCopy(
-    dir,
-    path,
-    config.vars,
-  );
+async function merge(config: ParsedConfig, dir: string): Promise<void> {
+  await recursiveCopy(dir, path, config.vars);
 }
 
 export default merge;

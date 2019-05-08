@@ -1,25 +1,31 @@
 import * as bluebird from 'bluebird';
 import * as childProcess from 'child_process';
-import { IExecResponse } from './interfaces';
+import { ExecResponse } from './interfaces';
 
 export default function execAsync(
   line: string,
   options: childProcess.ExecOptions,
-): bluebird<IExecResponse> {
-  return new bluebird((resolve, reject) => {
-    childProcess.exec(line, options, (err, stdout, stderror) => {
-      if (err) {
-        console.log('stdout', stdout);
-        console.log('stderror', stderror);
+): bluebird<ExecResponse> {
+  return new bluebird(
+    (resolve, reject): void => {
+      childProcess.exec(
+        line,
+        options,
+        (err, stdout, stderror): void => {
+          if (err) {
+            console.log('stdout', stdout);
+            console.log('stderror', stderror);
 
-        reject(err);
-      } else {
-        const execResponse: IExecResponse = {
-          stderror,
-          stdout,
-        };
-        resolve(execResponse);
-      }
-    });
-  });
+            reject(err);
+          } else {
+            const execResponse: ExecResponse = {
+              stderror,
+              stdout,
+            };
+            resolve(execResponse);
+          }
+        },
+      );
+    },
+  );
 }

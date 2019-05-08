@@ -1,7 +1,9 @@
 {
   "scripts": {
     "build": "tsc",
-    "start": "node ./dist/bp"
+    "start": "node ./dist/bp",
+    "dev": "nodemon",
+    "lint": "eslint ./src --ext .ts"
   },
   "dependencies": {
     "bluebird": "^3.5.3",
@@ -24,12 +26,21 @@
     "@types/node": "^10.12.18",
     "@types/nodegit": "^0.22.7",
     "@types/through2": "^2.0.34",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "nodemon": "^1.19.0",
     "prettier": "1.16.0",
-    "tslint": "^5.12.1",
-    "tslint-config-airbnb": "^5.11.1",
-    "tslint-config-prettier": "^1.17.0",
-    "typescript": "^3.2.4",
-    "typescript-tslint-plugin": "^0.2.1"
+    "typescript": "^3.2.4"
+  },
+  "nodemonConfig": {
+    "exec": "yarn build && yarn start",
+    "watch": [
+      "src/"
+    ],
+    "ext": "ts,json"
   },
   "license": "MIT"
 }
