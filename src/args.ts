@@ -2,7 +2,6 @@ import * as path from 'path';
 import * as commander from 'commander';
 
 interface CLI extends commander.Command {
-  path?: string;
   config?: string;
   dir?: string;
   key?: string;
@@ -51,7 +50,7 @@ if (typeof program.preset === 'undefined') {
   process.exit(1);
 }
 
-const modPath = path.resolve(program.path, program.mod);
+const modPath = path.resolve(program.dir, program.mod);
 
 const args = {
   modPath,
