@@ -52,8 +52,6 @@ if (typeof program.preset === 'undefined') {
 
 const modPath = path.resolve(program.dir, program.mod);
 
-console.log('mod path', modPath);
-
 const args = {
   modPath,
   ...program,
