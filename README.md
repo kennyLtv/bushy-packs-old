@@ -45,7 +45,7 @@ This shell file is executed and has access to all of our variables.
 
 ### scripting/
 
-Any .sp file in this folder is compiled with sourcemod. You need to have sourcemod already installed to be able to compile.
+Any .sp file in this folder is compiled with sourcemod. You need to have sourcemod already installed to be able to compile. I use the merge folder to move any of my dependencies'.
 
 ### delete.txt
 
