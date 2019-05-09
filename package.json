@@ -1,6 +1,6 @@
 {
   "name": "@bushy-packs/bushy-packs",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Bushy Packs is a CLI software that allows you to compile a list of repos and variables into game servers.",
   "scripts": {
     "build": "tsc",
