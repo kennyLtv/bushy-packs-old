@@ -43,7 +43,7 @@ The merge folder is the main way you will merge files/folders into your game ser
 
 This shell file is executed and has access to all of our variables.
 
-### scripting
+### scripting/
 
 Any .sp file in this folder is compiled with sourcemod. You need to have sourcemod already installed to be able to compile.
 
