@@ -37,7 +37,7 @@ A pack is a repo with specific folder and file structure. By placing files and f
 
 ### merge/
 
-The merge folder is the main way you will merge files/folders into your game server directory. The merge folder will overwrite files/folders without question.
+The merge folder is the main way you will merge files/folders into your game server directory. The merge folder will overwrite files/folders without question. Files that have .bp before their extension will be processed through handlebars. All variables are available as bp_variable. By adding .bpm before an extension, Bushy Packs will merge the files as if they are valve key value configs. This is useful for merging databases.cfg together.
 
 ### sh/init.sh
 
@@ -60,3 +60,55 @@ This is a list of files/folders that you can specify which you want deleted.
 ### post-merge/
 
 This is the same as merge but it runs after all other tasks.
+
+## Server Config
+
+A server config should be a repo with config.json in the root directory.
+
+Global variables are available to all servers within the preset.
+Global variables that start with "_" will be merged with the child variables.
+The child variable will be inserted into the %s inside the global. Look at the example. "chi.kz"  would have a tags variable of ``tarikgg,tarik,128 tick,128,tick,128tick,kz,chicago``.
+
+Example
+
+```json
+{
+  "presets": [
+    {
+      "name": "kz",
+      "repos": [
+        "tarikgg/bp-metamod",
+        "tarikgg/bp-metamod-csgo-vdf",
+        "tarikgg/bp-sourcemod"
+      ],
+      "globals": {
+        "_tags": "tarikgg,tarik,128 tick,128,tick,128tick,kz,%s",
+        "sm_afk_kick_time": 900.0,
+        "sm_afk_kick_warn_time": 840.0,
+        "ad_timer_time": "120",
+        "kz": true
+      },
+      "servers": {
+        "chi.kz": {
+          "hostName": "Tarik.GG KZ [Chicago]",
+          "rconPassword": "",
+          "region": 0,
+          "sbid": 7,
+          "tags": "chicago",
+          "kzApiKey": "",
+          "location": "Chicago"
+        },
+        "nyc.kz": {
+          "hostName": "Tarik.GG KZ 2 [NYC]",
+          "rconPassword": "",
+          "region": 0,
+          "sbid": 14,
+          "tags": "nyc",
+          "kzApiKey": "",
+          "location": "New York City"
+        }
+      }
+    }
+  ]
+}
+```
