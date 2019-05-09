@@ -3,7 +3,7 @@ import * as fs from 'fs-extra';
 import * as bluebird from 'bluebird';
 import * as path from 'path';
 
-import { path as serverPath } from '../args';
+import { dir } from '../args';
 
 async function deleteTxt(
   _config: ParsedConfig,
@@ -17,7 +17,7 @@ async function deleteTxt(
   await bluebird.map(
     deleteFileArray,
     async (file): Promise<void> => {
-      const filePath = path.join(serverPath, file);
+      const filePath = path.join(dir, file);
       try {
         await fs.access(filePath);
         await fs.unlink(filePath);
