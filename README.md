@@ -33,7 +33,7 @@ bp [options] --dir <dir> --config <config> --preset <preset>
 
 Options:
   -V, --version          output the version number
-  -m, --mod <mod>        The mod you are using. (cstring|csgo) (default: "csgo")
+  -m, --mod <mod>        The mod you are using. (cstrike|csgo) (default: "csgo")
   -c, --config <config>  The repo that holds your config.
   -d, --dir <dir>        The directory that holds your mod directory.
   -k, --key <key>        The name of the key in your .ssh folder. (default: "id_rsa")
