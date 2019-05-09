@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as commander from 'commander';
+import { version } from '../package.json';
 
 interface CLI extends commander.Command {
   config?: string;
@@ -12,7 +13,7 @@ interface CLI extends commander.Command {
 }
 
 const program: CLI = commander
-  .version('0.1.0')
+  .version(version)
   .usage('[options] --dir <dir> --config <config> --preset <preset>')
   .option('-m, --mod <mod>', 'The mod you are using. (cstring|csgo)', 'csgo')
   .option('-c, --config <config>', 'The repo that holds your config.')
