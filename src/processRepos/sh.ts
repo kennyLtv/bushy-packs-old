@@ -13,6 +13,8 @@ async function sh(config: ParsedConfig, repoDir: string): Promise<void> {
   const shellDir: string = path.join(repoDir, 'sh');
   const initPath: string = path.join(shellDir, 'init.sh');
 
+  console.log(allVars);
+
   const execOptions: childProcess.ExecOptions = {
     cwd: shellDir,
     env: allVars,
