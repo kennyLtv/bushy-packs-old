@@ -1,6 +1,5 @@
 import * as path from 'path';
 import * as commander from 'commander';
-import { readJsonSync } from 'fs-extra';
 
 interface CLI extends commander.Command {
   config?: string;
@@ -12,10 +11,8 @@ interface CLI extends commander.Command {
   mod?: string;
 }
 
-const pckg = readJsonSync('./package.json');
-
 const program: CLI = commander
-  .version(pckg.version)
+  .version('0.0.7')
   .usage('[options] --dir <dir> --config <config> --preset <preset>')
   .option('-m, --mod <mod>', 'The mod you are using. (cstring|csgo)', 'csgo')
   .option('-c, --config <config>', 'The repo that holds your config.')
