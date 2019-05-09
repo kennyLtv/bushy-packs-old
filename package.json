@@ -1,10 +1,19 @@
 {
+  "name": "bushy-packs",
+  "version": "0.0.1",
+  "description": "Bushy Packs is a CLI software that allows you to compile a list of repos and variables into game servers.",
   "scripts": {
     "build": "tsc",
     "start": "node ./dist/bp",
     "dev": "npm run build && npm run start",
-    "lint": "eslint ./src --ext .ts"
+    "lint": "eslint ./src --ext .ts",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags"
   },
+  "main": "dist/bp.js",
   "dependencies": {
     "bluebird": "^3.5.3",
     "commander": "^2.20.0",
@@ -34,5 +43,10 @@
     "prettier": "1.16.0",
     "typescript": "^3.2.4"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/busheezy/bushy-packs.git"
+  },
+  "author": "Ryan Bucshon"
 }
