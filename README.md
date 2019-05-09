@@ -4,6 +4,18 @@
 
 Bushy Packs is something I created because I wanted to git version control my game servers but I didn't want a single massive repo. Using a config that is specified on git, Bushy Packs will download a list of repos and execute each pack in order. Bushy Packs utilizes handlebars.js to allow templating your config files.
 
+- [Bushy Packs](#bushy-packs)
+  - [Requirements](#requirements)
+  - [Install](#install)
+  - [CLI Usage](#cli-usage)
+  - [Pack Structure](#pack-structure)
+    - [merge/](#merge)
+    - [sh/init.sh](#shinitsh)
+    - [scripting/](#scripting)
+    - [delete.txt](#deletetxt)
+    - [post-merge/](#post-merge)
+  - [Server Config](#server-config)
+
 ## Requirements
 
 You will need node.js with build-essentials. I have been using node v10.15.0 because one of our dependencies, nodegit, has prebuilt binaries.
