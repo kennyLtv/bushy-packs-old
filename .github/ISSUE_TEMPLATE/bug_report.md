@@ -20,7 +20,8 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Server(please complete the following information):**
- - OS: [e.g. Ubuntu]
+
+- OS: [e.g. Ubuntu]
 
 **Additional context**
 Add any other context about the problem here.
