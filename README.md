@@ -17,8 +17,8 @@ Bushy Packs is something I created because I wanted to git version control my ga
   - [Server Config](#server-config)
   - [Variables](#variables)
     - [Convenience Variables](#convenience-variables)
-    - [dir (bp_dir)](#dir-bp_dir)
-    - [modDir (bp_modDir)](#moddir-bp_moddir)
+      - [dir (bp_dir)](#dir-bp_dir)
+      - [modDir (bp_modDir)](#moddir-bp_moddir)
     - [Example](#example)
 
 ## Requirements
@@ -94,11 +94,11 @@ Variables are always prepended with "bp_" to prevent issues. You can use variabl
 
 Bushy Packs provided you a couple of variables for convenience.
 
-### dir (bp_dir)
+#### dir (bp_dir)
 
 This is the directory that you specified with --dir.
 
-### modDir (bp_modDir)
+#### modDir (bp_modDir)
 
 This is the mod directory. (dir/\<your mod\>)
 
