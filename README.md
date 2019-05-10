@@ -16,10 +16,10 @@ Bushy Packs is something I created because I wanted to git version control my ga
     - [post-merge/](#post-merge)
   - [Server Config](#server-config)
   - [Variables](#variables)
-  - [Convenience Variables](#convenience-variables)
-  - [dir (bp_dir)](#dir-bp_dir)
-  - [modDir (bp_modDir)](#moddir-bp_moddir)
-  - [Example](#example)
+    - [Convenience Variables](#convenience-variables)
+    - [dir (bp_dir)](#dir-bp_dir)
+    - [modDir (bp_modDir)](#moddir-bp_moddir)
+    - [Example](#example)
 
 ## Requirements
 
@@ -90,19 +90,19 @@ The child variable will be inserted into the %s inside the global. Look at the e
 
 Variables are always prepended with "bp_" to prevent issues. You can use variables within your handlebars and within your init.sh bash file.
 
-## Convenience Variables
+### Convenience Variables
 
 Bushy Packs provided you a couple of variables for convenience.
 
-## dir (bp_dir)
+### dir (bp_dir)
 
 This is the directory that you specified with --dir.
 
-## modDir (bp_modDir)
+### modDir (bp_modDir)
 
 This is the mod directory. (dir/\<your mod\>)
 
-## Example
+### Example
 
 ```json
 {
