@@ -19,7 +19,7 @@ Bushy Packs is something I created because I wanted to git version control my ga
     - [Convenience Variables](#convenience-variables)
       - [dir (bp_dir)](#dir-bp_dir)
       - [modDir (bp_modDir)](#moddir-bp_moddir)
-    - [Example](#example)
+  - [Example](#example)
 
 ## Requirements
 
@@ -102,7 +102,7 @@ This is the directory that you specified with --dir.
 
 This is the mod directory. (dir/\<your mod\>)
 
-### Example
+## Example
 
 ```json
 {
