@@ -50,10 +50,10 @@ if (typeof program.preset === 'undefined') {
   process.exit(1);
 }
 
-const modPath = path.resolve(program.dir, program.mod);
+const modDir = path.resolve(program.dir, program.mod);
 
 const args = {
-  modPath,
+  modDir,
   ...program,
 };
 

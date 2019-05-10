@@ -15,6 +15,11 @@ Bushy Packs is something I created because I wanted to git version control my ga
     - [delete.txt](#deletetxt)
     - [post-merge/](#post-merge)
   - [Server Config](#server-config)
+  - [Variables](#variables)
+  - [Convenience Variables](#convenience-variables)
+  - [dir (bp_dir)](#dir-bp_dir)
+  - [modDir (bp_modDir)](#moddir-bp_moddir)
+  - [Example](#example)
 
 ## Requirements
 
@@ -77,11 +82,27 @@ This is the same as merge but it runs after all other tasks.
 
 A server config should be a repo with config.json in the root directory.
 
+## Variables
+
 Global variables are available to all servers within the preset.
 Global variables that start with "_" will be merged with the child variables.
-The child variable will be inserted into the %s inside the global. Look at the example. "chi.kz"  would have a tags variable of ``tarikgg,tarik,128 tick,128,tick,128tick,kz,chicago``.
+The child variable will be inserted into the %s inside the global. Look at the example below.
 
-Example
+Variables are always prepended with "bp_" to prevent issues. You can use variables within your handlebars and within your init.sh bash file.
+
+## Convenience Variables
+
+Bushy Packs provided you a couple of variables for convenience.
+
+## dir (bp_dir)
+
+This is the directory that you specified with --dir.
+
+## modDir (bp_modDir)
+
+This is the mod directory. (dir/\<your mod\>)
+
+## Example
 
 ```json
 {
@@ -103,7 +124,7 @@ Example
       "servers": {
         "chi.kz": {
           "hostName": "Tarik.GG KZ [Chicago]",
-          "rconPassword": "",
+          "rconPassword": "example",
           "region": 0,
           "sbid": 7,
           "tags": "chicago",
@@ -112,7 +133,7 @@ Example
         },
         "nyc.kz": {
           "hostName": "Tarik.GG KZ 2 [NYC]",
-          "rconPassword": "",
+          "rconPassword": "example",
           "region": 0,
           "sbid": 14,
           "tags": "nyc",
@@ -124,3 +145,17 @@ Example
   ]
 }
 ```
+
+The usable variables for chi.kz would be:
+
+| Name                     | Value                                              |
+|--------------------------|----------------------------------------------------|
+| bp_tags                  | tarikgg,tarik,128 tick,128,tick,128tick,kz,chicago |
+| bp_sm_afk_kick_time      | 900.0                                              |
+| bp_sm_afk_kick_warn_time | 840.0                                              |
+| bp_ad_timer_time         | 120                                                |
+| bp_kz                    | true                                               |
+| bp_hostName              | Tarik.GG                                           |
+| bp_rconPassword          | example                                            |
+| bp_region                | 0                                                  |
+| ...                      | ...                                                |
