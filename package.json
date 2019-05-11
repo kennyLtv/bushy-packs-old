@@ -1,10 +1,13 @@
 {
   "name": "@bushy-packs/bushy-packs",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "Bushy Packs is a CLI software that allows you to compile a list of repos and variables into game servers.",
   "scripts": {
-    "start": "ts-node ./src/bp",
+    "build": "tsc",
+    "start": "node ./dist/bp",
+    "dev": "ts-node ./src/bp",
     "lint": "eslint ./src --ext .ts",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run lint",
     "preversion": "npm run lint",
     "version": "git add -A src",
