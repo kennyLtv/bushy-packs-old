@@ -11,7 +11,8 @@
     "prepublishOnly": "npm run lint",
     "preversion": "npm run lint",
     "version": "git add -A src",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "test": "jest"
   },
   "main": "dist/bp.js",
   "dependencies": {
@@ -29,6 +30,8 @@
     "bp": "./dist/bp.js"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
     "@types/bluebird": "^3.5.25",
     "@types/commander": "^2.12.2",
     "@types/fs-extra": "^5.0.4",
@@ -40,6 +43,7 @@
     "@types/through2": "^2.0.34",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
+    "babel-jest": "^24.8.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-prettier": "^3.0.1",

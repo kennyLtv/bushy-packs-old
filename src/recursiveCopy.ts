@@ -6,7 +6,7 @@ import * as bluebird from 'bluebird';
 import * as vdf from 'simple-vdf';
 import * as _ from 'lodash';
 
-import { modPath } from './args';
+import { modDir } from './args';
 import { EnvVars, IncObj } from './interfaces';
 import { Transform } from 'stream';
 
@@ -43,7 +43,7 @@ async function mergeVDF(
   vars: EnvVars,
 ): Promise<void> {
   const existingSmDbPath = path.join(
-    modPath,
+    modDir,
     'addons',
     'sourcemod',
     'configs',

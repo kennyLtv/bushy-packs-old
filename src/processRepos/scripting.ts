@@ -5,10 +5,10 @@ import * as path from 'path';
 import execAsync from '../execAsync';
 import * as bluebird from 'bluebird';
 
-import { modPath } from '../args';
+import { modDir } from '../args';
 
 const serverScriptingPath = path.join(
-  modPath,
+  modDir,
   'addons',
   'sourcemod',
   'scripting',
