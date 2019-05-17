@@ -1,6 +1,6 @@
 {
   "name": "@bushy-packs/bushy-packs",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "description": "Bushy Packs is a CLI software that allows you to compile a list of repos and variables into game servers.",
   "scripts": {
     "build": "tsc",
@@ -12,7 +12,8 @@
     "preversion": "npm run lint",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
-    "test": "jest"
+    "test": "npm run build && jest",
+    "test-run": "npm run start -- -c busheezy/bushy-packs-test-config -d ./tests/test-output -p test"
   },
   "main": "dist/bp.js",
   "dependencies": {

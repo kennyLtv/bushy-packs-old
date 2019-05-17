@@ -8,8 +8,10 @@ import parseConfig from './parseConfig';
 import processRepos from './processRepos/index';
 import remakeDir from './remakeDir';
 import { ParsedConfig } from './interfaces';
+import fileAccess from './fileAccess';
+import * as fs from 'fs-extra';
 
-import { config, repo } from './args';
+import { config, repo, modDir } from './args';
 
 const [, configRepoName]: string[] = config.split('/');
 
@@ -20,6 +22,11 @@ async function start(): Promise<void> {
   await remakeDir(reposDir);
   await fetchRepo(config, configDir);
   const parsedConfig: ParsedConfig = await parseConfig(configDir);
+
+  const access = await fileAccess(modDir)
+  if (!access) {
+    await fs.mkdirp(modDir);
+  }
 
   if (repo) {
     const newConfig: ParsedConfig = {

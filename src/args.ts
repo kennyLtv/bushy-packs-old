@@ -12,7 +12,7 @@ interface CLI extends commander.Command {
 }
 
 const program: CLI = commander
-  .version('0.0.10')
+  .version('0.1.0')
   .usage('[options] --dir <dir> --config <config> --preset <preset>')
   .option('-m, --mod <mod>', 'The mod you are using. (cstrike|csgo)', 'csgo')
   .option('-c, --config <config>', 'The repo that holds your config.')

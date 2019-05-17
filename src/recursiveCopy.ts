@@ -6,7 +6,7 @@ import * as bluebird from 'bluebird';
 import * as vdf from 'simple-vdf';
 import * as _ from 'lodash';
 
-import { modDir } from './args';
+import fileAccess from './fileAccess';
 import { EnvVars, IncObj } from './interfaces';
 import { Transform } from 'stream';
 
@@ -38,36 +38,42 @@ function handlebarsTransform(envs: EnvVars): Transform {
 }
 
 async function mergeVDF(
-  src: string,
-  dest: string,
+  srcPath: string,
+  destPath: string,
   vars: EnvVars,
 ): Promise<void> {
-  const existingSmDbPath = path.join(
-    modDir,
-    'addons',
-    'sourcemod',
-    'configs',
-    'databases.cfg',
-  );
-
-  await bluebird.join(
-    fs.readFile(existingSmDbPath),
-    fs.readFile(src),
-    async (serverSmDbBuffer, mergeSmDbBuffer): Promise<void> => {
-      const serverSmDbString = serverSmDbBuffer.toString();
-      const template = handlebars.compile(serverSmDbString);
-      const templatedString = template(vars);
-      const serverSmDbObj = vdf.parse(templatedString);
-
-      const mergeSmDbString = mergeSmDbBuffer.toString();
-      const mergeSmDbObj = vdf.parse(mergeSmDbString);
-
-      const newSmDbObj = _.merge(serverSmDbObj, mergeSmDbObj);
-      const newSbDbString = vdf.stringify(newSmDbObj, true);
-
-      await fs.writeFile(dest, newSbDbString);
-    },
-  );
+  try {
+    const access = await fileAccess(destPath);
+    
+    if (access) {
+      const srcBuffer = await fs.readFile(srcPath);
+      const destBuffer = await fs.readFile(destPath);
+  
+      const srcString = srcBuffer.toString();
+      const destString = destBuffer.toString();
+  
+      const srcTemplate = handlebars.compile(srcString);
+      const srcTemplatedString = srcTemplate(vars);
+  
+      const srcVdfObj = vdf.parse(srcTemplatedString);
+  
+      const destVdfObj = vdf.parse(destString);
+  
+      const mergedVdfObj = _.merge(srcVdfObj, destVdfObj);
+  
+      const newSbDbString = vdf.stringify(mergedVdfObj, true);
+  
+      await fs.writeFile(destPath, newSbDbString);
+    } else {
+      const srcBuffer = await fs.readFile(srcPath);
+      const srcString = srcBuffer.toString();
+      const srcTemplate = handlebars.compile(srcString);
+      const srcTemplatedString = srcTemplate(vars);
+      await fs.writeFile(destPath, srcTemplatedString);
+    }
+  } catch (err) {
+    console.error('err while merging vdf', err);
+  }
 }
 
 async function copyTemplatedFile(

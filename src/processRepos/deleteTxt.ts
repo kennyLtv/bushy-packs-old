@@ -2,6 +2,7 @@ import { ParsedConfig } from '../interfaces';
 import * as fs from 'fs-extra';
 import * as bluebird from 'bluebird';
 import * as path from 'path';
+import fileAccess from '../fileAccess';
 
 import { dir } from '../args';
 
@@ -19,11 +20,14 @@ async function deleteTxt(
     async (file): Promise<void> => {
       const filePath = path.join(dir, file);
       try {
-        await fs.access(filePath);
-        await fs.unlink(filePath);
-        console.log('deleted', file);
+        const access = await fileAccess(filePath);
+        if (access) {
+          await fs.unlink(filePath);
+          console.log('file deleted');
+        }
+        console.log('file not found', file);
       } catch (err) {
-        console.log('file does not exist to delete');
+        console.error('error while deleting file');
       }
     },
   );
