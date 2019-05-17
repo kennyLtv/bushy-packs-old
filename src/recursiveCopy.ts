@@ -44,25 +44,25 @@ async function mergeVDF(
 ): Promise<void> {
   try {
     const access = await fileAccess(destPath);
-    
+
     if (access) {
       const srcBuffer = await fs.readFile(srcPath);
       const destBuffer = await fs.readFile(destPath);
-  
+
       const srcString = srcBuffer.toString();
       const destString = destBuffer.toString();
-  
+
       const srcTemplate = handlebars.compile(srcString);
       const srcTemplatedString = srcTemplate(vars);
-  
+
       const srcVdfObj = vdf.parse(srcTemplatedString);
-  
+
       const destVdfObj = vdf.parse(destString);
-  
+
       const mergedVdfObj = _.merge(srcVdfObj, destVdfObj);
-  
+
       const newSbDbString = vdf.stringify(mergedVdfObj, true);
-  
+
       await fs.writeFile(destPath, newSbDbString);
     } else {
       const srcBuffer = await fs.readFile(srcPath);

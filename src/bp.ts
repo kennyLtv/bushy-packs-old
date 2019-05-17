@@ -23,7 +23,7 @@ async function start(): Promise<void> {
   await fetchRepo(config, configDir);
   const parsedConfig: ParsedConfig = await parseConfig(configDir);
 
-  const access = await fileAccess(modDir)
+  const access = await fileAccess(modDir);
   if (!access) {
     await fs.mkdirp(modDir);
   }
