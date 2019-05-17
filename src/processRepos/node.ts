@@ -1,4 +1,4 @@
-import { ParsedConfig, EnvVars, ExecResponse } from '../interfaces';
+import { ParsedConfig, EnvVars } from '../interfaces';
 import * as childProcess from 'child_process';
 
 import * as path from 'path';
@@ -13,18 +13,12 @@ async function node(config: ParsedConfig, repoDir: string): Promise<void> {
     env: allVars,
   };
 
-  const { stderror, stdout }: ExecResponse = await execAsync(
+  const stdout = await execAsync(
     'npm install --loglevel=error --no-audit && node ./index.js',
     execOptions,
   );
 
-  if (stdout.trim()) {
-    console.log(stdout.trim());
-  }
-
-  if (stderror.trim()) {
-    console.error('Error: ', stderror.trim());
-  }
+  console.log(stdout);
 }
 
 export default node;

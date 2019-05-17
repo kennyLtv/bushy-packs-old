@@ -54,6 +54,7 @@ const modDir = path.resolve(program.dir, program.mod);
 
 const args = {
   modDir,
+  dir: path.resolve(program.dir),
   ...program,
 };
 

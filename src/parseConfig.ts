@@ -2,7 +2,7 @@ import { ParsedConfig, EnvVars } from './interfaces';
 import * as fs from 'fs-extra';
 import * as _ from 'lodash';
 import * as path from 'path';
-import { preset as presetName, dir, mod } from './args';
+import { preset as presetName, dir, mod, modDir } from './args';
 
 async function parseConfig(configDir: string): Promise<ParsedConfig> {
   const config = await fs.readJson(path.join(configDir, 'config.json'));
@@ -26,6 +26,7 @@ async function parseConfig(configDir: string): Promise<ParsedConfig> {
   let newVars: EnvVars = {
     mod,
     dir,
+    modDir,
   };
 
   _.each(

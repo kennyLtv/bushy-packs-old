@@ -1,11 +1,10 @@
 import * as bluebird from 'bluebird';
 import * as childProcess from 'child_process';
-import { ExecResponse } from './interfaces';
 
 export default function execAsync(
   line: string,
   options: childProcess.ExecOptions,
-): bluebird<ExecResponse> {
+): bluebird<string> {
   return new bluebird(
     (resolve, reject): void => {
       childProcess.exec(
@@ -13,16 +12,11 @@ export default function execAsync(
         options,
         (err, stdout, stderror): void => {
           if (err) {
-            console.log('stdout', stdout);
-            console.log('stderror', stderror);
-
             reject(err);
+          } else if (stderror) {
+            reject (stderror.trim());
           } else {
-            const execResponse: ExecResponse = {
-              stderror,
-              stdout,
-            };
-            resolve(execResponse);
+            resolve(stdout.trim());
           }
         },
       );

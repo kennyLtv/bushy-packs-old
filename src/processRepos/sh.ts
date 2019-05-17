@@ -1,5 +1,5 @@
 import * as childProcess from 'child_process';
-import { ParsedConfig, EnvVars, ExecResponse } from '../interfaces';
+import { ParsedConfig, EnvVars } from '../interfaces';
 import execAsync from '../execAsync';
 import * as path from 'path';
 import * as fs from 'fs-extra';
@@ -29,18 +29,12 @@ async function sh(config: ParsedConfig, repoDir: string): Promise<void> {
     },
   );
 
-  const { stderror, stdout }: ExecResponse = await execAsync(
+  const stdout = await execAsync(
     `${exportString}bash init.sh`,
     execOptions,
   );
 
-  if (stdout.trim()) {
-    console.log(stdout.trim());
-  }
-
-  if (stderror.trim()) {
-    console.error('Error: ', stderror.trim());
-  }
+  console.log(stdout);
 }
 
 export default sh;

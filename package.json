@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./dist/bp",
-    "dev": "ts-node ./src/bp",
+    "dev": "npm run build && npm run start",
     "lint": "eslint ./src --ext .ts",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint",
@@ -51,7 +51,6 @@
     "jest": "^24.8.0",
     "prettier": "1.16.0",
     "ts-jest": "^24.0.2",
-    "ts-node": "^8.1.0",
     "typescript": "^3.2.4"
   },
   "license": "MIT",

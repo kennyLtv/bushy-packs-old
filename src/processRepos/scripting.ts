@@ -1,4 +1,4 @@
-import { ParsedConfig, ExecResponse } from '../interfaces';
+import { ParsedConfig } from '../interfaces';
 import recursiveCopy from '../recursiveCopy';
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -21,7 +21,7 @@ async function scripting(config: ParsedConfig, repoDir: string): Promise<void> {
 
   const ls = await fs.readdir(repoScriptingPath);
 
-  await bluebird.map(
+  await bluebird.mapSeries(
     ls,
     async (script: string): Promise<void> => {
       if (path.extname(script) !== '.sp') {
@@ -34,17 +34,11 @@ async function scripting(config: ParsedConfig, repoDir: string): Promise<void> {
       const smxName = script.replace('.sp', '.smx');
       const command = `./spcomp ${script} -o../plugins/${smxName} -w203`;
 
-      const { stderror, stdout }: ExecResponse = await execAsync(command, {
+      const stdout = await execAsync(command, {
         cwd: serverScriptingPath,
       });
 
-      if (stderror.trim()) {
-        console.log(stderror.trim());
-      }
-
-      if (stdout.trim()) {
-        console.log(stdout.trim());
-      }
+      console.log(stdout);
     },
   );
 }

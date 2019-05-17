@@ -7,11 +7,6 @@ export interface ParsedConfig {
   vars: EnvVars;
 }
 
-export interface ExecResponse {
-  stdout: string;
-  stderror: string;
-}
-
 export interface IncObj {
   [key: string]: number;
 }
