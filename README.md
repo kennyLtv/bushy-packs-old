@@ -4,6 +4,8 @@
 
 Bushy Packs is something I created because I wanted to git version control my game servers but I didn't want a single massive repo. Using a config that is specified on git, Bushy Packs will download a list of repos and execute each pack in order. Bushy Packs utilizes handlebars.js to allow templating your config files.
 
+![BP Preview](readme/bp.gif)
+
 - [Bushy Packs](#bushy-packs)
   - [Requirements](#requirements)
   - [Install](#install)
