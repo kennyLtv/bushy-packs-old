@@ -14,7 +14,7 @@ export default function execAsync(
           if (err) {
             reject(err);
           } else if (stderror) {
-            reject (stderror.trim());
+            reject(stderror.trim());
           } else {
             resolve(stdout.trim());
           }

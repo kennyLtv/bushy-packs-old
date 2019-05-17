@@ -29,10 +29,7 @@ async function sh(config: ParsedConfig, repoDir: string): Promise<void> {
     },
   );
 
-  const stdout = await execAsync(
-    `${exportString}bash init.sh`,
-    execOptions,
-  );
+  const stdout = await execAsync(`${exportString}bash init.sh`, execOptions);
 
   console.log(stdout);
 }

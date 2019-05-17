@@ -7,8 +7,7 @@
   - [ ] Conditions.
   - [ ] Increment Helper.
 - [ ] VDF Merging.
-- [ ] Shell script.
-  - [ ] Variables.
+- [x] Shell script.
 - [ ] Scripting.
 - [ ] delete.txt.
-- [ ] Fail on missing args
+- [x] Fail on missing args
