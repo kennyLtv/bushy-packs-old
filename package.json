@@ -24,6 +24,7 @@
     "lodash": "^4.17.11",
     "minimist": "^1.2.0",
     "nodegit": "^0.24.0",
+    "pjson": "^1.0.9",
     "simple-vdf": "^1.1.1",
     "through2": "^3.0.0"
   },
