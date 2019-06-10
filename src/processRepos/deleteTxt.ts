@@ -24,8 +24,9 @@ async function deleteTxt(
         if (access) {
           await fs.unlink(filePath);
           console.log('file deleted');
+        } else {
+          console.log('file not found', file);
         }
-        console.log('file not found', file);
       } catch (err) {
         console.error('error while deleting file');
       }
