@@ -3,3 +3,4 @@ dist
 test_dir
 .repos
 tests/test-output
+id_rsa

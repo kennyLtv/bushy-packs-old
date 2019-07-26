@@ -13,7 +13,8 @@
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
     "test": "npm run build && jest",
-    "test-run": "npm run start -- -c busheezy/bushy-packs-test-config -d ./tests/test-output -p test"
+    "test-run": "npm run start -- -c busheezy/bushy-packs-test-config -d ./tests/test-output -p test",
+    "test-run2": "npm run start -- -c tarikgg/tarik-server-configs -d ./tests/test-output -p nyc.pistol.dm"
   },
   "main": "dist/bp.js",
   "dependencies": {
