@@ -10,8 +10,13 @@ async function fetchPresetRepos(repos: string[]): Promise<void> {
     async (repo): Promise<void> => {
       const [, gitRepoName] = repo.split('/');
       const newRepoDir = path.join(reposDir, gitRepoName);
-      await fetchRepo(repo, newRepoDir);
-      console.log(`Cloned:  ${gitRepoName}`);
+
+      try {
+        await fetchRepo(repo, newRepoDir);
+        console.log(`Cloned:  ${gitRepoName}`);
+      } catch (err) {
+        console.error('error fetching repo: ', gitRepoName);
+      }
     },
   );
 }
