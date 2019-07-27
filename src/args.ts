@@ -55,11 +55,17 @@ if (typeof program.preset === 'undefined') {
 
 const modDir = path.resolve(program.dir, program.mod);
 
+let lgsm = null;
+
+if (program.lgsm) {
+  lgsm = path.resolve(program.lgsm);
+}
+
 const args = {
   modDir,
   ...program,
   dir: path.resolve(program.dir),
-  lgsm: path.resolve(program.lgsm),
+  lgsm,
 };
 
 export = args;
