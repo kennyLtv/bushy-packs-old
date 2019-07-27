@@ -36,12 +36,13 @@ npm i -g @bushy-packs/bushy-packs
 ## CLI Usage
 
 ```txt
-bp [options] --dir <dir> --config <config> --preset <preset>
+Usage: bp [options] --dir <dir> --config <config> --preset <preset>
 
 Options:
   -V, --version          output the version number
   -m, --mod <mod>        The mod you are using. (cstrike|csgo) (default: "csgo")
   -c, --config <config>  The repo that holds your config.
+  -l, --lgsm <dir>       The LGSM directory that holds your configs.
   -d, --dir <dir>        The directory that holds your mod directory.
   -k, --key <key>        The name of the key in your .ssh folder. (default: "id_rsa")
   -p, --preset <preset>  The preset within your config

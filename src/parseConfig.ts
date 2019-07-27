@@ -20,7 +20,7 @@ async function parseConfig(configDir: string): Promise<ParsedConfig> {
     },
   );
 
-  const { globals } = configPreset;
+  const { globals, lgsm } = configPreset;
   const serverVars = configPreset.servers[presetName];
 
   let newVars: EnvVars = {
@@ -55,6 +55,7 @@ async function parseConfig(configDir: string): Promise<ParsedConfig> {
   const parsedObj: ParsedConfig = {
     repos: configPreset.repos,
     vars: newVars,
+    lgsm,
   };
 
   return parsedObj;

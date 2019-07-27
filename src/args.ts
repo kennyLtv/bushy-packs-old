@@ -10,6 +10,7 @@ interface CLI extends commander.Command {
   repo?: string;
   bitbucket?: boolean;
   mod?: string;
+  lgsm?: string;
 }
 
 const program: CLI = commander
@@ -17,6 +18,7 @@ const program: CLI = commander
   .usage('[options] --dir <dir> --config <config> --preset <preset>')
   .option('-m, --mod <mod>', 'The mod you are using. (cstrike|csgo)', 'csgo')
   .option('-c, --config <config>', 'The repo that holds your config.')
+  .option('-l, --lgsm <dir>', 'The LGSM directory that holds your configs.')
   .option('-d, --dir <dir>', 'The directory that holds your mod directory.')
   .option(
     '-k, --key <key>',
@@ -55,8 +57,9 @@ const modDir = path.resolve(program.dir, program.mod);
 
 const args = {
   modDir,
-  dir: path.resolve(program.dir),
   ...program,
+  dir: path.resolve(program.dir),
+  lgsm: path.resolve(program.lgsm),
 };
 
 export = args;
