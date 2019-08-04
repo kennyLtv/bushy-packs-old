@@ -30,6 +30,13 @@ Handlebars.registerHelper(
   },
 );
 
+Handlebars.registerHelper(
+  'ifNotEquals',
+  (arg1, arg2, options): boolean => {
+    return arg1 != arg2 ? options.fn(this) : options.inverse(this);
+  },
+);
+
 function handlebarsTransform(envs: EnvVars): Transform {
   return through2(
     {
