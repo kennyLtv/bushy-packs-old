@@ -37,6 +37,30 @@ Handlebars.registerHelper(
   },
 );
 
+Handlebars.registerHelper(
+  'ifInList',
+  (arg1, arg2, options): boolean => {
+    const listArray = arg2.split(',');
+    if (listArray.includes(arg1)) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  },
+);
+
+Handlebars.registerHelper(
+  'ifNotInList',
+  (arg1, arg2, options): boolean => {
+    const listArray = arg2.split(',');
+    if (!listArray.includes(arg1)) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  },
+);
+
 function handlebarsTransform(envs: EnvVars): Transform {
   return through2(
     {
