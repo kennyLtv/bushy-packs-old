@@ -23,21 +23,21 @@ handlebars.registerHelper(
   },
 );
 
-Handlebars.registerHelper(
+handlebars.registerHelper(
   'ifEquals',
   (arg1, arg2, options): boolean => {
     return arg1 == arg2 ? options.fn(this) : options.inverse(this);
   },
 );
 
-Handlebars.registerHelper(
+handlebars.registerHelper(
   'ifNotEquals',
   (arg1, arg2, options): boolean => {
     return arg1 != arg2 ? options.fn(this) : options.inverse(this);
   },
 );
 
-Handlebars.registerHelper(
+handlebars.registerHelper(
   'ifInList',
   (arg1, arg2, options): boolean => {
     const listArray = arg2.split(',');
@@ -49,7 +49,7 @@ Handlebars.registerHelper(
   },
 );
 
-Handlebars.registerHelper(
+handlebars.registerHelper(
   'ifNotInList',
   (arg1, arg2, options): boolean => {
     const listArray = arg2.split(',');
